@@ -101,6 +101,22 @@ footer{
     font-family: 'Oswald', sans-serif;
     font-weight: bold;
 }
+
+.form-sigin {
+    max-width: 380px;
+    background-color: #fff;
+    border: none;
+    padding: 15px 35px 45px 35px;
+}
+.icon {
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
 @media (max-width: 960px) {
     #header-container {
         flex-direction: column;
@@ -120,3 +136,4 @@ footer{
     }
     
 }
+
