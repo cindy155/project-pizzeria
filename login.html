@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
+    <meta charset="utf-8" accept-charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
@@ -19,7 +19,7 @@
     <div
       class="container d-flex align-items-center justify-content-center vh-100"
     >
-      <form class="form-sigin">
+      <form class="form-sigin" action="login.php" method="POST" >
         <div class="icon d-flex align-items-center justify-content-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,6 +38,7 @@
 
         <input
           type="text"
+          name="username"
           placeholder="usuario o email"
           required
           autofocus
@@ -45,8 +46,15 @@
         />
 
         <label>Contraseña :</label>
-        <input type="password" placeholder="password" required class="form-control" /> <br />
-        <div class="container d-flex align-items-center justify-content-center">
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          required
+          class="form-control"
+        />
+        <br />
+        <div class=" d-flex align-items-center justify-content-center">
           <button class="btn btn-primary btn-lg btn-block">login</button>
         </div>
       </form>
