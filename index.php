@@ -98,6 +98,48 @@
       <div class="main-content">
         <h2>NUESTRAS PIZZAS</h2>
         <ul class="gallery">
+
+          <?php
+          include_once("config_products.php");
+          try {
+            $pdo = new PDO("mysql:host=" . SERVER_NAME . ";dbname=" . DATABASE_NAME, USER_NAME, PASSWORD);
+            // set the PDO error mode to exception
+            $pdo->setAttribute
+            (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // echo "conexion exitosa"; 
+          } catch (PDOException $e) {
+            // echo "Conexion fallida: " . $e->getMessage();
+          }
+          $sql="SELECT p.product_name,p.price,date_format(p.start_date,'%d/%m/%Y') AS date,p.image from products p INNER join categories c on p.id_category=c.id_category ORDER by p.price ASC";
+      
+          $stmt = $pdo->prepare($sql);
+          $stmt->execute();
+          $data=$stmt->fetchAll();
+          foreach($data as $row)
+          {   
+            ?>   
+
+            <li>
+            <div class="box">
+              <figure>
+                <img src= "<?php echo $row['image']; ?>"  />
+                <figcaption>
+                  <h3><?php echo $row ['product_name']; ?></h3>
+                  <p>$<?php echo $row ['price']; ?></p>
+                  
+                  <time><?php echo $row ['date']?></time>
+                </figcaption>
+                <button class="button" value="1">
+                  Añadir al carrito <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+              </figure>
+            </div>
+          </li>
+
+          <?php
+          }
+          ?>
+
           <li>
             <div class="box">
               <figure>
@@ -105,6 +147,7 @@
                 <figcaption>
                   <h3>fugazzeta</h3>
                   <p>$1.600</p>
+
                   <time>05/07/2023</time>
                 </figcaption>
                 <button class="button" value="1">
