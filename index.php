@@ -124,10 +124,10 @@
               <figure>
                 <img src= "<?php echo $row['image']; ?>"  />
                 <figcaption>
-                  <h3><?php echo $row ['product_name']; ?></h3>
-                  <p>$<?php echo $row ['price']; ?></p>
+                  <h3><?php echo $row['product_name']; ?></h3>
+                  <p>$<?php echo $row['price']; ?></p>
                   
-                  <time><?php echo $row ['date']?></time>
+                  <time><?php echo $row['date']?></time>
                 </figcaption>
                 <button class="button" value="1">
                   Añadir al carrito <i class="fa-solid fa-cart-shopping"></i>
