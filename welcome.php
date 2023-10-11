@@ -25,8 +25,57 @@ echo "<br>";
 echo "hora de conexion " .$_SESSION["time"];
 echo "<br>";
 echo "<br>";
-echo $table = "<table>"."<thead>"."<tr>"."<th>Id</th>"."<th>Producto</th>"."<th>Categoria</th>"."<th>Precio</th>"."<th>Fecha de Alta</th>"."</tr>"."</thead>";
+//echo $table = "<table>"."<thead>"."<tr>"."<th>Id</th>"."<th>Producto</th>"."<th>Categoria</th>"."<th>Precio</th>"."<th>Fecha de Alta</th>"."</tr>"."</thead>";
 
 $table = "<table><thead><tr><th>Id</th><th>Producto</th><th>Categoria</th><th>Precio</th><th>Fecha de Alta</th></tr></thead>";
 }
+
+include_once("config_products.php");
+          try {
+            $pdo = new PDO("mysql:host=" . SERVER_NAME . ";dbname=" . DATABASE_NAME, USER_NAME, PASSWORD);
+            // set the PDO error mode to exception
+            $pdo->setAttribute
+            (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // echo "conexion exitosa"; 
+          } catch (PDOException $e) {
+            // echo "Conexion fallida: " . $e->getMessage();
+          }
+          $sql= "SELECT p.id_product,c.category_name, p.product_name,p.price,date_format(p.start_date,'%d/%m/%Y') AS date from categories c INNER JOIN products p on p.id_category=c.id_category;";
+          $stmt= $pdo->prepare($sql);
+          //le pasamos el metodo prepare al objeto $pdo, sanea la instruccion sql
+          $stmt->execute();
+          $data=$stmt->fetchAll();
+          //es la variable que atrapa la info de $sql. 
+          echo $table;
+          echo "tbody";
+          foreach($data as $row)
+        {
+         echo "<tr>";
+         echo "<td>";
+         echo $row ['id_product'];
+         echo "</td>";
+        
+         echo "<td>";
+         echo $row ['category_name'];
+         echo "</td>";
+
+         echo "<td>";
+         echo $row ['product_name'];
+         echo "</td>";
+
+         echo "<td>";
+         echo $row ['price'];
+         echo "</td>";
+
+         echo "<td>";
+         echo $row ['date'];
+         echo "</td>";
+
+         echo "</td>";
+         echo "</tr>";
+
+        }
+        echo "</tbody>";
+        echo "</table>";
+
 ?>

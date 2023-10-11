@@ -115,6 +115,7 @@
           $stmt = $pdo->prepare($sql);
           $stmt->execute();
           $data=$stmt->fetchAll();
+          //organiza los datos en un arrays asociativo 
           foreach($data as $row)
           {   
             ?>   
