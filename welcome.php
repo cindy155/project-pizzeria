@@ -47,7 +47,8 @@ include_once("config_products.php");
           $data=$stmt->fetchAll();
           //es la variable que atrapa la info de $sql. 
           echo $table;
-          echo "tbody";
+          echo "<tbody>";
+
           foreach($data as $row)
         {
          echo "<tr>";
