@@ -2,11 +2,24 @@
 <html lang="en">
 
 <head>
+
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/bootbox.min.js"></script>
+
+    <script>
+    function deleteProducts(cod) 
+    {
+      bootbox.confirm('Desea usted eliminar el producto?' +cod, function(result){if (result){window.location="delete.php?q="+cod;}});
+        
+    }
+  </script>
+
 </head>
 
 <body>
@@ -14,12 +27,13 @@
     <div>
       <a href="logout.php">logout</a>
 
-
     </div>
   </nav>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>
@@ -64,6 +78,7 @@ echo $table;
 echo "<tbody>";
 foreach ($data as $row) {
   echo "<tr>";
+
   echo "<td>";
   echo $row['id_product'];
   echo "</td>";
@@ -85,18 +100,16 @@ foreach ($data as $row) {
   echo "</td>";
 
   echo "<td>";
-  echo "<a href = ''>eliminar producto</a>";
+  ?>
+  <a href ="#" onclick="deleteProducts(<?php echo $row['id_product'];?>)">eliminar producto</a>
+  <?php
   echo "</td>";
 
   echo "<td>";
   echo "<a href = ''>actualizar producto</a>";
   echo "</td>";
 
-
-  echo "</td>";
   echo "</tr>";
-
- 
 
 }
 echo "</tbody>";
