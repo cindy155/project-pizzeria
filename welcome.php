@@ -7,13 +7,21 @@
   <title>Bootstrap demo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootbox.min.js"></script>
+    <script>
+        function deleteProduct(cod)
+        {
+            bootbox.confirm('Desea usted eliminar el producto?' +cod, function(result){if (result){window.location="delete.php?q="+cod;}});
+        }
+    </script>
+
 </head>
 
 <body>
   <nav class="navtop">
     <div>
       <a href="logout.php">logout</a>
-
 
     </div>
   </nav>
@@ -41,7 +49,7 @@ if ($_SESSION['logueado']) {
     <br>
   </div>
   <?php
-  $table = "<table class ='table table-bordered table-striped'><thead class='thead-dark'><tr><th>Id</th><th>Producto</th><th>Categoria</th><th>Precio</th><th>Fecha de Alta</th> <th>eliminar producto</th><th>actualizar producto</th></tr></thead>";
+  $table = "<table class ='table table-bordered table-striped'><thead class='thead-dark'><tr><th>Id</th><th>Producto</th><th>Categoria</th><th>Precio</th><th>Fecha de Alta</th> <th>Eliminar </th><th>Actualizar</th></tr></thead>";
 }
 
 include_once("config_products.php");
@@ -52,7 +60,7 @@ include_once("config_products.php");
             (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // echo "conexion exitosa"; 
           } catch (PDOException $e) {
-            // echo "Conexion fallida: " . $e->getMessage();
+              echo "Conexion fallida: " . $e->getMessage();
           }
           $sql= "SELECT p.id_product,c.category_name, p.product_name,p.price,date_format(p.start_date,'%d/%m/%Y') AS date from categories c INNER JOIN products p on p.id_category=c.id_category;";
           $stmt= $pdo->prepare($sql);
@@ -61,38 +69,45 @@ include_once("config_products.php");
           $data=$stmt->fetchAll();
           //es la variable que atrapa la info de $sql. 
           echo $table;
-          echo "tbody";
+          echo "<tbody>";
           foreach($data as $row)
-        {
-         echo "<tr>";
-         echo "<td>";
-         echo $row ['id_product'];
-         echo "</td>";
+          {
+          echo "<tr>";
+
+          echo "<td>";
+          echo $row ['id_product'];
+          echo "</td>";
         
-         echo "<td>";
-         echo $row ['category_name'];
-         echo "</td>";
+          echo "<td>";
+          echo $row ['category_name'];
+          echo "</td>";
+          
+          echo "<td>";
+          echo $row ['product_name'];
+          echo "</td>";
+          
+          echo "<td>";
+          echo $row ['price'];
+          echo "</td>";
 
-  echo "<td>";
-  echo $row['date'];
-  echo "</td>";
+          echo "<td>";
+          echo $row['date'];
+          echo "</td>";
 
-  echo "<td>";
-  echo "<a href = ''>eliminar producto</a>";
-  echo "</td>";
+          echo "<td>";
+          ?>
+          <a href ='#' onclick="deleteProducts(<?php echo $row['id_product']; ?>)">eliminar producto</a>
+          <?php
+          echo "</td>";
 
-  echo "<td>";
-  echo "<a href = ''>actualizar producto</a>";
-  echo "</td>";
+          echo "<td>";
+          echo "<a href =''>actualizar producto</a>";
+          echo "</td>";
 
+          echo "</tr>"; 
 
-  echo "</td>";
-  echo "</tr>";
-
- 
-
-}
-echo "</tbody>";
-echo "</table>";
+          }
+        echo "</tbody>";
+        echo "</table>";
 
 ?>
