@@ -10,7 +10,7 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootbox.min.js"></script>
     <script>
-        function deleteProduct(cod)
+        function deleteProducts(cod)
         {
             bootbox.confirm('Desea usted eliminar el producto?' +cod, function(result){if (result){window.location="delete.php?q="+cod;}});
         }
@@ -96,7 +96,7 @@ include_once("config_products.php");
 
           echo "<td>";
           ?>
-          <a href ='#' onclick="deleteProduct(<?php echo $row['id_product']; ?>)">eliminar producto</a>
+          <a href ='#' onclick="deleteProducts(<?php echo $row['id_product']; ?>)">eliminar producto</a>
           <?php
           echo "</td>";
 

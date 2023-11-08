@@ -37,7 +37,7 @@
                     <select id="categoria" name="categoria" class="form-control">
                     <!-- Las categorias seran cargadas de la db -->
                     <?php
-                    
+                    session_start();
                     include_once ("config_products.php");
 
                     try {
