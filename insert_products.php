@@ -37,7 +37,7 @@
                     <select id="categoria" name="categoria" class="form-control">
 
                     <?php
-                    
+                    session_start();
                     include_once ("config_products.php");
 
                     try {

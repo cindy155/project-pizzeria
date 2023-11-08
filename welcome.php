@@ -10,7 +10,7 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootbox.min.js"></script>
     <script>
-        function deleteProduct(cod)
+        function deleteProducts(cod)
         {
             bootbox.confirm('Desea usted eliminar el producto?' +cod, function(result){if (result){window.location="delete.php?q="+cod;}});
         }
