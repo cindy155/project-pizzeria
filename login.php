@@ -2,13 +2,12 @@
 # conectamos con la base de datos, el bloque try catch maneja los errores en forma de excepciones
 include_once("config_login.php");
 try {
-$pdo = new PDO("mysql:host=".SERVER_NAME.";dbname=".DATABASE_NAME,USER_NAME,PASSWORD);
- // set the PDO error mode to exception
- $pdo->setAttribute
- (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//echo "conexion exitosa"; 
-}
-catch(PDOException $e) {
+  $pdo = new PDO("mysql:host=" . SERVER_NAME . ";dbname=" . DATABASE_NAME, USER_NAME, PASSWORD);
+  // set the PDO error mode to exception
+  $pdo->setAttribute
+  (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  //echo "conexion exitosa"; 
+} catch (PDOException $e) {
   echo "Conexion fallida: " . $e->getMessage();
 }
 
@@ -60,8 +59,8 @@ if ($row == 0) {
   session_start();
   $_SESSION['username'] = $usr;
   date_default_timezone_set("America/Argentina/Buenos_Aires");
-  $_SESSION["time"]=date('H:i:s');
-  $_SESSION['logueado']=true;
+  $_SESSION["time"] = date('H:i:s');
+  $_SESSION['logueado'] = true;
   header("location:welcome.php");
 }
 

@@ -2,22 +2,22 @@
 
 session_start();
 
-if ($_SESSION['logueado']){
+if ($_SESSION['logueado']) {
 
-    include_once ("config_products.php");
+    include_once("config_products.php");
 
     try {
         $pdo = new PDO("mysql:host=" . SERVER_NAME . ";dbname=" . DATABASE_NAME, USER_NAME, PASSWORD);
         // set the PDO error mode to exception
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //echo "Connected successfully";
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
 
     $idDel = $_GET['q'];
-    
-    $sql = "delete from products where id_product=".$idDel;
+
+    $sql = "delete from products where id_product=" . $idDel;
 
     $stmt = $pdo->prepare($sql);
 
