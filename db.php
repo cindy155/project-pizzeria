@@ -19,7 +19,7 @@ class Db
 
     /**
      * Constructor para obtener una conexion.
-     * @return connection
+     * @returnconnection
      */
 
     public function __construct()
@@ -37,7 +37,7 @@ class Db
     /**
      * Prepara una SQL Query
      * 
-     * @param String $query
+     * @param string $query
      * @return object
      */
 
@@ -50,7 +50,7 @@ class Db
     /**
      * Ejecuta una SQL Query
      * 
-     * @param String $query
+     * @param string $query
      * @return object
      */
 
@@ -65,7 +65,7 @@ class Db
      *
      * @return void
      */
-    public function Close()
+    public function close()
     {
         $this->connection = null;
     }

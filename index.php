@@ -101,19 +101,12 @@
 
           <?php
           include_once("config_products.php");
-          try {
-            $pdo = new PDO("mysql:host=" . SERVER_NAME . ";dbname=" . DATABASE_NAME, USER_NAME, PASSWORD);
-            // set the PDO error mode to exception
-            $pdo->setAttribute
-            (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // echo "conexion exitosa"; 
-          } catch (PDOException $e) {
-            // echo "Conexion fallida: " . $e->getMessage();
-          }
+          include_once("Db2.php");
+          $link=new Db();
+         
           $sql="SELECT p.product_name,p.price,date_format(p.start_date,'%d/%m/%Y') AS date,p.image from products p INNER join categories c on p.id_category=c.id_category ORDER by p.price ASC";
       
-          $stmt = $pdo->prepare($sql);
-          $stmt->execute();
+          $stmt = $link->run($sql,null);
           $data=$stmt->fetchAll();
           //organiza los datos en un arrays asociativo 
           foreach($data as $row)
